@@ -155,9 +155,49 @@
         mode: "no-cors",
         keepalive: true,                                   // survives the redirect to the congrats page
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ code: r.code, prize: r.title, prizeId: r.id })
+        body: JSON.stringify({ code: r.code, prize: r.title, prizeId: r.id, name: r.name || "", phone: r.phone || "" })
       }).catch(function () {});
     } catch (e) {}
+  }
+
+  /* ---------- optional name & phone pop-up ---------- */
+  var modal = document.getElementById("contactModal");
+  var form = document.getElementById("contactForm");
+  var nameInput = document.getElementById("contactName");
+  var phoneInput = document.getElementById("contactPhone");
+  var errorEl = document.getElementById("contactError");
+  var skipBtn = document.getElementById("contactSkip");
+
+  function persist(result) {
+    if (cfg.oneSpinPerDevice) writeStore(result);
+    else { try { sessionStorage.setItem(STORE_KEY, JSON.stringify(result)); } catch (e) {} }
+  }
+  function goToPrize() { window.location.href = "congrats.html"; }
+
+  function askForContact(result) {
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+    nameInput.focus();
+
+    skipBtn.onclick = goToPrize;
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      var name = nameInput.value.trim();
+      var phone = phoneInput.value.trim();
+      if (!name && !phone) { goToPrize(); return; }            // nothing typed = same as Skip
+      var digits = phone.replace(/\D/g, "").length;
+      if (phone && (!/^\+?[\d\s\-()]+$/.test(phone) || digits < 7 || digits > 15)) {
+        errorEl.textContent = "Please enter a valid phone number, or clear it to skip.";
+        errorEl.hidden = false;
+        phoneInput.focus();
+        return;
+      }
+      result.name = name;
+      result.phone = phone;
+      persist(result);
+      logWin(result);                                          // second log call adds name/phone to the same row
+      goToPrize();
+    };
   }
 
   /* ---------- spin ---------- */
@@ -188,11 +228,10 @@
       finished = true;
       var p = prizes[idx];
       var result = { id: p.id, title: p.title, description: p.description, code: makeCode(p.id), ts: Date.now() };
-      if (cfg.oneSpinPerDevice) writeStore(result);
-      else { try { sessionStorage.setItem(STORE_KEY, JSON.stringify(result)); } catch (e) {} }
+      persist(result);
       logWin(result);
-      statusEl.textContent = "You won " + p.title + "! 🎉";
-      setTimeout(function () { window.location.href = "congrats.html"; }, 1500);
+      statusEl.textContent = "Nice spin! 🎉";
+      askForContact(result);
     }
     canvas.addEventListener("transitionend", finish, { once: true });
     setTimeout(finish, duration + 400);   // safety net
