@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ms.Cookiza · Spin &amp; Win</title>
+  <meta name="description" content="Spin the Ms.Cookiza wheel and win a discount or a free cookie treat.">
+  <meta name="theme-color" content="#DB161B">
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="flag-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="flag-hoist" aria-hidden="true"></div>
+
+  <main class="page">
+    <header class="brand">
+      <img class="brand__logo" src="img/logo.png" alt="Ms.Cookiza logo" width="140" height="140">
+      <h1 class="brand__name">Ms.Cookiza</h1>
+      <p class="brand__tag">Spin the wheel. Win something sweet.</p>
+    </header>
+
+    <section class="stage" aria-label="Spin to win">
+      <div class="wheel-wrap" id="wheelWrap">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" role="img" aria-label="Prize wheel"></canvas>
+        <button id="spinBtn" class="hub" type="button">SPIN</button>
+      </div>
+
+      <p id="status" class="status" role="status" aria-live="polite">Tap SPIN to try your luck!</p>
+      <a id="claimLink" class="btn btn--primary" href="congrats.html" hidden>View my prize</a>
+    </section>
+
+    <section class="prizes" aria-labelledby="prizesTitle">
+      <h2 id="prizesTitle">Prizes on the wheel</h2>
+      <ul id="prizeList" class="prizes__list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> Ms.Cookiza</footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/wheel.js"></script>
+</body>
+</html>

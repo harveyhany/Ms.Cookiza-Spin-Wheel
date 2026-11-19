@@ -1,0 +1,200 @@
+/* Ms.Cookiza Spin & Win — Omani flag palette (white · red · green) */
+:root {
+  --red: #DB161B;
+  --red-dark: #A80F14;
+  --green: #008000;
+  --green-dark: #005C1F;
+  --white: #FFFFFF;
+  --cream: #FFF9EF;
+  --line: #EADFCB;
+  --ink: #3B1F14;          /* chocolate */
+  --gold: #F2B84B;
+  --radius: 22px;
+  --font: "Fredoka", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(219,22,27,.07), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(0,128,0,.08), transparent 45%),
+    var(--cream);
+}
+
+/* ---- Flag-inspired framing ---- */
+.flag-bar { display: grid; grid-template-rows: 1fr 1fr 1fr; height: 18px; border-bottom: 1px solid var(--line); }
+.flag-bar i:nth-child(1) { background: var(--white); }
+.flag-bar i:nth-child(2) { background: var(--red); }
+.flag-bar i:nth-child(3) { background: var(--green); }
+.flag-hoist { position: fixed; top: 18px; bottom: 0; left: 0; width: 12px; background: var(--red); z-index: 0; }
+@media (min-width: 760px) { .flag-hoist { width: 22px; } }
+
+.page {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 22px 28px 30px;
+  text-align: center;
+}
+.page--center { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* ---- Brand ---- */
+.brand__logo { display: block; margin: 0 auto; width: clamp(110px, 32vw, 150px); height: auto; border-radius: 50%; box-shadow: 0 6px 16px rgba(59,31,20,.18); }
+.brand__name {
+  margin: 4px 0 0;
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--red);
+  text-shadow: 0 3px 0 var(--white), 0 5px 0 rgba(0,92,31,.25);
+}
+.brand__tag { margin: 4px 0 0; font-size: 1.1rem; color: var(--green-dark); font-weight: 600; }
+.brand--small { margin-bottom: 14px; }
+.brand--small .brand__name { font-size: 2rem; display: inline-block; vertical-align: middle; margin-left: 6px; }
+.brand--small .brand__logo { display: inline-block; width: 64px; vertical-align: middle; }
+
+/* ---- Wheel ---- */
+.stage { margin-top: 18px; }
+.wheel-wrap {
+  position: relative;
+  width: min(92vw, 520px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  filter: drop-shadow(0 14px 22px rgba(59,31,20,.28));
+}
+#wheel { width: 100%; height: 100%; display: block; border-radius: 50%; will-change: transform; }
+
+.pointer {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 0; height: 0;
+  transform: translateX(-50%);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 42px solid var(--red);
+  z-index: 3;
+  filter: drop-shadow(0 3px 0 var(--white)) drop-shadow(0 4px 6px rgba(0,0,0,.35));
+}
+.pointer::after {
+  content: "";
+  position: absolute;
+  top: -38px; left: -6px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 2px var(--white);
+}
+
+.hub {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 21%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 5px solid var(--gold);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0383c, var(--red) 55%, var(--red-dark));
+  color: var(--white);
+  font: 700 clamp(.95rem, 4.2vw, 1.5rem)/1 var(--font);
+  letter-spacing: 1px;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,.35), inset 0 -4px 8px rgba(0,0,0,.2);
+  animation: pulse 1.8s ease-in-out infinite;
+  transition: transform .15s ease, filter .15s ease;
+}
+.hub:hover:not(:disabled) { filter: brightness(1.08); }
+.hub:active:not(:disabled) { transform: translate(-50%, -50%) scale(.94); }
+.hub:focus-visible, .btn:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.hub:disabled { animation: none; cursor: default; filter: saturate(.6); }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,.35), 0 0 0 0 rgba(219,22,27,.5), inset 0 -4px 8px rgba(0,0,0,.2); }
+  50%      { box-shadow: 0 4px 12px rgba(0,0,0,.35), 0 0 0 14px rgba(219,22,27,0), inset 0 -4px 8px rgba(0,0,0,.2); }
+}
+
+.status { min-height: 1.6em; margin: 22px 0 12px; font-size: 1.2rem; font-weight: 600; color: var(--green-dark); }
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 13px 24px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: 600 1.05rem/1 var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,.18); }
+.btn--primary { background: var(--green); color: var(--white); }
+.btn--ghost { background: var(--white); color: var(--green-dark); border-color: var(--green); }
+.btn--small { padding: 9px 16px; font-size: .95rem; }
+.btn--social { width: 100%; color: var(--white); }
+.btn--instagram { background: linear-gradient(45deg, #F58529, #DD2A7B 45%, #8134AF 75%, #515BD4); }
+[hidden] { display: none !important; }
+
+/* ---- Prize list ---- */
+.prizes { margin-top: 30px; }
+.prizes h2 { margin: 0 0 12px; font-size: 1.1rem; color: var(--ink); opacity: .75; font-weight: 600; }
+.prizes__list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.prizes__list li {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  font-size: .95rem;
+  font-weight: 600;
+}
+.prizes__list li::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--c, var(--red)); }
+
+/* ---- Congrats ---- */
+.congrats-body #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+.card {
+  width: min(100%, 460px);
+  padding: 30px 26px 28px;
+  background: var(--white);
+  border-radius: var(--radius);
+  border-top: 8px solid var(--red);
+  border-bottom: 8px solid var(--green);
+  box-shadow: 0 18px 40px rgba(59,31,20,.18);
+  animation: pop .6s cubic-bezier(.2,1.4,.4,1) both;
+}
+@keyframes pop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.card__eyebrow { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: 2px; }
+.card__title { margin: 4px 0 0; font-size: 1.6rem; font-weight: 600; }
+.card__prize { margin: 6px 0 0; font-size: clamp(2rem, 9vw, 2.7rem); font-weight: 700; line-height: 1.1; color: var(--red); }
+.card__desc { margin: 10px 0 0; font-size: 1.05rem; }
+.card__hint { margin: 12px 0 0; font-size: .92rem; opacity: .75; }
+
+.coupon {
+  margin-top: 20px;
+  padding: 14px 16px;
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 14px;
+  border: 2.5px dashed var(--green);
+  border-radius: 16px;
+  background: #F3FAF3;
+}
+.coupon__label { font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--green-dark); }
+.coupon__code { font-size: 1.35rem; letter-spacing: 1.5px; font-weight: 700; word-break: break-all; }
+
+.divider { border: 0; border-top: 1.5px solid var(--line); margin: 24px 0 18px; }
+.follow__title { margin: 0 0 14px; font-size: 1.1rem; font-weight: 600; }
+.follow { display: grid; gap: 12px; }
+
+.footer { position: relative; z-index: 1; padding: 14px; text-align: center; font-size: .85rem; opacity: .6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hub, .card { animation: none; }
+  .btn { transition: none; }
+}

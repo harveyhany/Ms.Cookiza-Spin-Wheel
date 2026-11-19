@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Congratulations! · Ms.Cookiza</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#008000">
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="congrats-body">
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="flag-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="flag-hoist" aria-hidden="true"></div>
+
+  <main class="page page--center">
+    <header class="brand brand--small">
+      <img class="brand__logo" src="img/logo.png" alt="Ms.Cookiza logo" width="72" height="72">
+      <span class="brand__name">Ms.Cookiza</span>
+    </header>
+
+    <article class="card" id="card" hidden>
+      <p class="card__eyebrow">Congratulations!</p>
+      <h1 class="card__title">You won</h1>
+      <p class="card__prize" id="prizeTitle"></p>
+      <p class="card__desc" id="prizeDesc"></p>
+
+      <div class="coupon">
+        <span class="coupon__label">Your code</span>
+        <strong class="coupon__code" id="couponCode"></strong>
+        <button class="btn btn--ghost btn--small" id="copyBtn" type="button">Copy</button>
+      </div>
+      <p class="card__hint">Show this screen to the cashier to claim your prize.</p>
+
+      <hr class="divider">
+
+      <h2 class="follow__title">Follow us on Instagram for more sweet news</h2>
+      <div class="follow">
+        <a class="btn btn--social btn--instagram" id="igLink" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+          Follow on Instagram
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> Ms.Cookiza</footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/congrats.js"></script>
+</body>
+</html>
