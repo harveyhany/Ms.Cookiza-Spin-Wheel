@@ -12,6 +12,7 @@
   if (!prize || !prize.title) { window.location.replace("index.html"); return; }
 
   document.getElementById("year").textContent = new Date().getFullYear();
+  if (prize.name) document.querySelector(".card__eyebrow").textContent = "Congratulations, " + prize.name.split(/\s+/)[0] + "!";
   document.getElementById("prizeTitle").textContent = prize.title;
   document.getElementById("prizeDesc").textContent = prize.description || "";
   document.getElementById("couponCode").textContent = prize.code || "";
